@@ -1,0 +1,19 @@
+---
+- name: Install and start nginx on EC2 instance
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update cache
+      apt:
+        update_cache: yes
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
+    - name: Log that nginx has installed
+      shell: echo "Nginx installed and started on EC2 instances"
